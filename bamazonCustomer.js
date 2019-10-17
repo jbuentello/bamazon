@@ -28,8 +28,9 @@ db.query('SELECT item_id,department_name,stock_quantity, product_name, price FRO
       });
     }
   }
-  else { throw error; }
+  else { throw error};
   console.table(itemArray);
+  questionsForUsers()
 });    
   
 function questionsForUsers() {
@@ -45,40 +46,41 @@ function questionsForUsers() {
   }
 
   ]).then(function(userResponse){
-    var item = parsInt(userResponse.itemSelected);
-    var quantity = userResponse.quantity;
-    db.query('SELECT * FROM products WHERE item-id = ${item}', function (error, response){
+    var item = parseInt(userResponse.itemSelected);
+    var quantity = parseInt(userResponse.quantity);
+    // console.log(item);
+    // console.log(quantity);
+    db.query('SELECT * FROM products WHERE item_id = ?', [item], function (error, response){
       if (error){
-        console.log("Error");
+        console.log(error);
         return;
       }
       else {
         itemData = response[0];
-        console.log('This product is in stock, we have ${itemData.product_name} in stock.')
-        var itemsLeft = itemData.stock_quantity - quantity
-        var price = quantity*itemData.price
-        db.query('UPDATE products SET stock_quantity = ${itemsLeft} WHERE item_id = ${item}', function(error, repsonse){
-          if (error){
-            console.log("Update Failed check quantity");
-            return; 
-          }
-          else{
-            console.log(`Your total cost is $${price}.`)
-            var newSales = productData.product_sales + price
-            db.query(`UPDATE products SET product_sales = ${newSales} WHERE item_id = ${item}`, function(error,response){
-              if (error){
-                console.log("Quantity update failed.");
-                return;
-              }
-              else{
-                console.log('Sorry for the inconvenience, but we only have ${itemData.stock_quantity} available')
-                questionsForUsers()
-              }
-            }); 
-          }
-        });
+        if (quantity > itemData.stock_quantity) {
+          console.log('Insufficient quantity');
+          db.end();
+          return;
+        }
+        else {
+          console.log('This product is in stock, we have ', itemData.stock_quantity, ' in stock.')
+          var itemsLeft = itemData.stock_quantity - quantity
+          var price = quantity*itemData.price
+          db.query('UPDATE products SET stock_quantity = ? WHERE item_id = ?', [itemsLeft, item], function(error, response){
+            if (error){
+              console.log(error);
+              db.end();
+              return; 
+            }
+            else{
+              console.log(`Your total cost is $${price}.`)
+              db.end();
+              return;
+            }
+          });
+        }
       }
     });
   });
+  return;
 }
-db.end();
