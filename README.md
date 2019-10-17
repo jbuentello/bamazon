@@ -9,3 +9,22 @@ If the item is not available set up an alert so that the user know the item is n
 
 Below are examples showing all of these processes:
 
+<img src="https://github.com/jbuentello/bamazon/blob/master/Images/Screen%20Shot%201.png">
+
+<img src="https://github.com/jbuentello/bamazon/blob/master/Images/Screen%20Shot%202.png">
+
+<img src="https://github.com/jbuentello/bamazon/blob/master/Images/Screen%20Shot%203.png">
+          
+<img src="https://github.com/jbuentello/bamazon/blob/master/Images/Screen%20Shot%204.png">
+
+<img src="https://github.com/jbuentello/bamazon/blob/master/Images/Screen%20Shot%205.png">
+
+<img src="https://github.com/jbuentello/bamazon/blob/master/Images/Screen%20Shot%206.png">
+
+<img src="https://github.com/jbuentello/bamazon/blob/master/Images/Screen%20Shot%207.png">
+
+<img src="https://github.com/jbuentello/bamazon/blob/master/Images/Screen%20Shot%208.png">
+
+<img src="https://github.com/jbuentello/bamazon/blob/master/Images/Screen%20Shot%209.png">
+
+<img src="https://github.com/jbuentello/bamazon/blob/master/Images/Screen%20Shot%2010.png">
